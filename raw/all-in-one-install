@@ -1,3 +1,4 @@
+#!/bin/sh
 DEBIAN_FRONTEND=noninteractive apt-get install -y --force-yes contrail-openstack-database
 DEBIAN_FRONTEND=noninteractive apt-get install -y --force-yes contrail-openstack
 DEBIAN_FRONTEND=noninteractive apt-get install -y --force-yes contrail-openstack-config default-jre sysv-rc
