@@ -1,0 +1,2 @@
+curl <>/testbed_all_in_one.py > /opt/contrail/utils/fabfile/testbeds/testbed.py
+cd /opt/contrail/utils && fab setup_all
