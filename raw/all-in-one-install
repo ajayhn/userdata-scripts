@@ -1,9 +1,9 @@
 #!/bin/sh
-DEBIAN_FRONTEND=noninteractive apt-get install -y --force-yes contrail-openstack-database
-DEBIAN_FRONTEND=noninteractive apt-get install -y --force-yes contrail-openstack
-DEBIAN_FRONTEND=noninteractive apt-get install -y --force-yes contrail-openstack-config default-jre sysv-rc
-DEBIAN_FRONTEND=noninteractive apt-get install -y --force-yes contrail-openstack-control
-DEBIAN_FRONTEND=noninteractive apt-get install -y --force-yes contrail-openstack-analytics
-DEBIAN_FRONTEND=noninteractive apt-get install -y --force-yes contrail-openstack-webui nodejs=0.8.15-1contrail1
-DEBIAN_FRONTEND=noninteractive apt-get install -y --force-yes contrail-openstack-vrouter
-DEBIAN_FRONTEND=noninteractive apt-get install -y --force-yes fabric contrail-fabric-utils
+DEBIAN_FRONTEND=noninteractive sudo apt-get install -y --force-yes contrail-openstack-database
+DEBIAN_FRONTEND=noninteractive sudo apt-get install -y --force-yes contrail-openstack
+DEBIAN_FRONTEND=noninteractive sudo apt-get install -y --force-yes contrail-openstack-config default-jre sysv-rc
+DEBIAN_FRONTEND=noninteractive sudo apt-get install -y --force-yes contrail-openstack-control
+DEBIAN_FRONTEND=noninteractive sudo apt-get install -y --force-yes contrail-openstack-analytics
+DEBIAN_FRONTEND=noninteractive sudo apt-get install -y --force-yes contrail-openstack-webui nodejs=0.8.15-1contrail1
+DEBIAN_FRONTEND=noninteractive sudo apt-get install -y --force-yes contrail-openstack-vrouter
+DEBIAN_FRONTEND=noninteractive sudo apt-get install -y --force-yes fabric contrail-fabric-utils
