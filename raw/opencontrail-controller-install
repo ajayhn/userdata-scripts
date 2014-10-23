@@ -10,3 +10,6 @@ DEBIAN_FRONTEND=noninteractive sudo apt-get install -y --force-yes contrail-open
 DEBIAN_FRONTEND=noninteractive sudo apt-get install -y --force-yes contrail-openstack-webui nodejs=0.8.15-1contrail1
 DEBIAN_FRONTEND=noninteractive sudo apt-get install -y --force-yes contrail-openstack
 DEBIAN_FRONTEND=noninteractive sudo apt-get install -y --force-yes fabric contrail-fabric-utils
+
+# for avoiding 'sudo: unable to resolve host' in AWS
+echo $(hostname -I | cut -d\  -f1) $(hostname) | sudo tee -a /etc/hosts
