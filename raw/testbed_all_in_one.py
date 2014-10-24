@@ -1,7 +1,9 @@
 from fabric.api import env
+import commands
 
 #Management ip addresses of hosts in the cluster
-host1 = 'root@127.0.0.1'
+status, self_ip = commands.getstatusoutput("ip route get 8.8.8.8 | awk '/8.8.8.8/ {print $NF}'")
+host1 = 'root@%s' %(self_ip)
 
 #External routers if any
 #for eg. 
@@ -12,7 +14,7 @@ ext_routers = []
 router_asn = 64512
 
 #Host from which the fab commands are triggered to install and provision
-host_build = 'root@127.0.0.1'
+host_build = 'root@%s' %(self_ip)
 
 #Role definition of the hosts.
 env.roledefs = {
