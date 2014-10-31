@@ -1,5 +1,33 @@
 #!/bin/sh
-sudo echo "deb http://${SERVER}/opencontrail-r120/ opencontrail-r120 main" >> /etc/apt/sources.list
-sudo echo "deb http://${SERVER}/opencontrail-thirdparty/ opencontrail-thirdparty main" >> /etc/apt/sources.list
-sudo echo "deb http://${SERVER}/opencontrail-stock/ opencontrail-stock main" >> /etc/apt/sources.list
+OPENSTACK_VER=${OPENSTACK:-icehouse}
+CONTRAIL_VER=${CONTRAIL:-r120}
+DISTRO_VER=${DISTRO:-ubuntu1204}
+
+echo "openstack " ${OPENSTACK_VER}
+echo "contrail " ${CONTRAIL_VER}
+echo "distro " ${DISTRO_VER}
+
+APT_SOURCES_FILE=${APT_SOURCES_FILE:-/etc/apt/sources.list.d/opencontrail.list}
+
+case ${OPENSTACK_VER},${CONTRAIL_VER},${DISTRO_VER} in
+    havana,r120,ubuntu1204)
+        echo "deb http://ubuntu-repo.opencontrail.org.s3-website-us-east-1.amazonaws.com opencontrail-stock-ubuntu1204-havana main" >> ${APT_SOURCES_FILE}
+        echo "deb http://ubuntu-repo.opencontrail.org.s3-website-us-east-1.amazonaws.com opencontrail-r120-havana main" >> ${APT_SOURCES_FILE}
+        ;;
+
+    icehouse,r120,ubuntu1204)
+        echo "deb http://ubuntu-repo.opencontrail.org.s3-website-us-east-1.amazonaws.com opencontrail-stock-ubuntu1204-icehouse main" >> ${APT_SOURCES_FILE}
+        echo "deb http://ubuntu-repo.opencontrail.org.s3-website-us-east-1.amazonaws.com opencontrail-r120-icehouse main" >> ${APT_SOURCES_FILE}
+        ;;
+
+    icehouse,r120,ubuntu1404)
+        echo "deb http://ubuntu-repo.opencontrail.org.s3-website-us-east-1.amazonaws.com opencontrail-stock-ubuntu1404-icehouse main" >> ${APT_SOURCES_FILE}
+        echo "deb http://ubuntu-repo.opencontrail.org.s3-website-us-east-1.amazonaws.com opencontrail-r120-icehouse main" >> ${APT_SOURCES_FILE}
+        ;;
+
+    *)
+        echo "Unknown combination ${OPENSTACK_VER}, ${CONTRAIL_VER}, ${DISTRO_VER}"
+        exit 1
+esac
+
 sudo apt-get update
