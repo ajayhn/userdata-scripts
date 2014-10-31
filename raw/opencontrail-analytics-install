@@ -1,8 +1,8 @@
 #!/bin/sh
-sudo echo "deb http://192.241.237.46/opencontrail-r110/ opencontrail-r110 main" >> /etc/apt/sources.list
-sudo echo "deb http://192.241.237.46/opencontrail-r120/ opencontrail-r120 main" >> /etc/apt/sources.list
-sudo echo "deb http://192.241.237.46/opencontrail-thirdparty/ opencontrail-thirdparty main" >> /etc/apt/sources.list
-sudo echo "deb http://192.241.237.46/opencontrail-stock/ opencontrail-stock main" >> /etc/apt/sources.list
+sudo echo "deb http://${SERVER}/opencontrail-r110/ opencontrail-r110 main" >> /etc/apt/sources.list
+sudo echo "deb http://${SERVER}/opencontrail-r120/ opencontrail-r120 main" >> /etc/apt/sources.list
+sudo echo "deb http://${SERVER}/opencontrail-thirdparty/ opencontrail-thirdparty main" >> /etc/apt/sources.list
+sudo echo "deb http://${SERVER}/opencontrail-stock/ opencontrail-stock main" >> /etc/apt/sources.list
 sudo apt-get update
 DEBIAN_FRONTEND=noninteractive sudo apt-get install -y --force-yes contrail-openstack-analytics
 DEBIAN_FRONTEND=noninteractive sudo apt-get install -y --force-yes fabric contrail-fabric-utils

@@ -1,5 +1,10 @@
 #!/bin/sh
-curl https://raw.githubusercontent.com/ajayhn/userdata-scripts/master/raw/testbed_all_in_one.py?token=1607150__eyJzY29wZSI6IlJhd0Jsb2I6YWpheWhuL3VzZXJkYXRhLXNjcmlwdHMvbWFzdGVyL3Jhdy90ZXN0YmVkX2FsbF9pbl9vbmUucHkiLCJleHBpcmVzIjoxNDEyOTkwMjEwfQ%3D%3D--85b7b3ef29de4a27d78c66f442dfaeb9ba5ae307 > /opt/contrail/utils/fabfile/testbeds/testbed.py
+curl https://raw.githubusercontent.com/ajayhn/userdata-scripts/master/raw/testbed_all_in_one.py > /opt/contrail/utils/fabfile/testbeds/testbed.py
 ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa
 cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+
+# temporary fixups till committed in repo
+sed -i "s/'1.04' in rls/rls and '1.04' in rls/" /opt/contrail/utils/fabfile/tasks/provision.py
+sed -i 's/220k/300k/' /opt/contrail/contrail_installer/contrail_setup_utils/setup.py
+
 #cd /opt/contrail/utils && fab setup_all
