@@ -9,7 +9,7 @@ if [ -f ${PUBKEY_FILE} ]; then
    ${ECHO} ssh-add ${PUBKEY_FILE}
 else
    echo "No testbed public key ${PUBKEY_FILE}, generating..."
-   ${ECHO} ssh-keygen -t rsa -f foo -N ""
+   ${ECHO} ssh-keygen -t rsa -f ${PUBKEY_FILE} -N ""
 fi
 
 HOSTS=${HOSTS:-127.0.0.1}
