@@ -23,3 +23,7 @@ for HOST in ${HOSTS}; do
 EOF
 
 done
+
+# set ssh key pointer in example testbeds
+${ECHO} echo "env.key_filename='${PUBKEY_FILE}'" >> /opt/contrail/utils/fabfile/testbeds/testbed_singlebox_example.py
+${ECHO} echo "env.key_filename='${PUBKEY_FILE}'" >> /opt/contrail/utils/fabfile/testbeds/testbed_multibox_example.py
