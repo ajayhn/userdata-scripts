@@ -15,9 +15,9 @@ fi
 HOSTS=${HOSTS:-127.0.0.1}
 for HOST in ${HOSTS}; do 
     ${ECHO} ssh-copy-id -i ${PUBKEY_FILE} ${USER}@${HOST}
-    ${ECHO} ssh ${USER}@${HOST} sudo apt-get install -y dpkg-dev contrail-setup contrail-fabric-utils;
-    ${ECHO} ssh ${USER}@${HOST} sudo pip install fabric==1.7.0;
-    ssh ${USER}@${HOST} <<EOF
+    ${ECHO} ssh -i ${PUBKEY_FILE} ${USER}@${HOST} sudo apt-get install -y dpkg-dev contrail-setup contrail-fabric-utils;
+    ${ECHO} ssh -i ${PUBKEY_FILE} ${USER}@${HOST} sudo pip install fabric==1.7.0;
+    ssh -i ${PUBKEY_FILE} ${USER}@${HOST} <<EOF
         ${ECHO} sed -i -e 's/def create_install_repo_node\(.*\):/def create_install_repo_node\1:\n    return\n/' /opt/contrail/utils/fabfile/tasks/install.py
         ${ECHO} sed -i -e "s/if '1.04' in rls:/if rls and '1.04' in rls:/" /opt/contrail/utils/fabfile/tasks/provision.py
 EOF
