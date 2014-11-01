@@ -1,7 +1,7 @@
 #!/bin/sh
 
 USER=${USER:-root}
-PUBKEY_FILE=${PUBKEY_FILE:-$(PWD)/testbed-key}
+PUBKEY_FILE=${PUBKEY_FILE:-${PWD}/testbed-key}
 ECHO=${ECHO:-}
 
 if [ -f ${PUBKEY_FILE} ]; then
