@@ -20,6 +20,7 @@ for HOST in ${HOSTS}; do
     ssh -i ${PUBKEY_FILE} ${USER}@${HOST} <<EOF
         ${ECHO} sed -i -e 's/def create_install_repo_node\(.*\):/def create_install_repo_node\1:\n    return\n/' /opt/contrail/utils/fabfile/tasks/install.py
         ${ECHO} sed -i -e "s/if '1.04' in rls:/if rls and '1.04' in rls:/" /opt/contrail/utils/fabfile/tasks/provision.py
+        ${ECHO} sed -i -e 's/Xss220k/Xss300k/' /opt/contrail/contrail_installer/contrail_setup_utils/setup.py
 EOF
 
 done
