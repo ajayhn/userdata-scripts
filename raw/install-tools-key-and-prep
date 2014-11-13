@@ -13,7 +13,6 @@ else
 fi
 
 HOSTS=${HOSTS:-127.0.0.1}
-ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no root@localhost
 for HOST in ${HOSTS}; do 
     ${ECHO} ssh-copy-id -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${PUBKEY_FILE} ${USER}@${HOST}
     ${ECHO} ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${PUBKEY_FILE} ${USER}@${HOST} sudo apt-get install -y dpkg-dev contrail-setup contrail-fabric-utils;
