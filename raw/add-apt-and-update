@@ -11,18 +11,18 @@ APT_SOURCES_FILE=${APT_SOURCES_FILE:-/etc/apt/sources.list.d/opencontrail.list}
 
 case ${OPENSTACK_VER},${CONTRAIL_VER},${DISTRO_VER} in
     havana,r120,ubuntu1204)
-        echo "deb http://ubuntu-repo.opencontrail.org.s3-website-us-east-1.amazonaws.com opencontrail-stock-ubuntu1204-havana main" >> ${APT_SOURCES_FILE}
-        echo "deb http://ubuntu-repo.opencontrail.org.s3-website-us-east-1.amazonaws.com opencontrail-r120-havana main" >> ${APT_SOURCES_FILE}
+        echo "deb [arch=amd64] http://ubuntu-repo.opencontrail.org.s3-website-us-east-1.amazonaws.com opencontrail-stock-ubuntu1204-havana main" >> ${APT_SOURCES_FILE}
+        echo "deb [arch=amd64] http://ubuntu-repo.opencontrail.org.s3-website-us-east-1.amazonaws.com opencontrail-r120-havana main" >> ${APT_SOURCES_FILE}
         ;;
 
     icehouse,r120,ubuntu1204)
-        echo "deb http://ubuntu-repo.opencontrail.org.s3-website-us-east-1.amazonaws.com opencontrail-stock-ubuntu1204-icehouse main" >> ${APT_SOURCES_FILE}
-        echo "deb http://ubuntu-repo.opencontrail.org.s3-website-us-east-1.amazonaws.com opencontrail-r120-icehouse main" >> ${APT_SOURCES_FILE}
+        echo "deb [arch=amd64] http://ubuntu-repo.opencontrail.org.s3-website-us-east-1.amazonaws.com opencontrail-stock-ubuntu1204-icehouse main" >> ${APT_SOURCES_FILE}
+        echo "deb [arch=amd64] http://ubuntu-repo.opencontrail.org.s3-website-us-east-1.amazonaws.com opencontrail-r120-icehouse main" >> ${APT_SOURCES_FILE}
         ;;
 
     icehouse,r120,ubuntu1404)
-        echo "deb http://ubuntu-repo.opencontrail.org.s3-website-us-east-1.amazonaws.com opencontrail-stock-ubuntu1404-icehouse main" >> ${APT_SOURCES_FILE}
-        echo "deb http://ubuntu-repo.opencontrail.org.s3-website-us-east-1.amazonaws.com opencontrail-r120-icehouse main" >> ${APT_SOURCES_FILE}
+        echo "deb [arch=amd64] http://ubuntu-repo.opencontrail.org.s3-website-us-east-1.amazonaws.com opencontrail-stock-ubuntu1404-icehouse main" >> ${APT_SOURCES_FILE}
+        echo "deb [arch=amd64] http://ubuntu-repo.opencontrail.org.s3-website-us-east-1.amazonaws.com opencontrail-r120-icehouse main" >> ${APT_SOURCES_FILE}
         ;;
 
     *)
