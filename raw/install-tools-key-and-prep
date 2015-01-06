@@ -1,5 +1,32 @@
 #!/bin/sh
 
-RELEASE=${CONTRAIL:-r120}
+USER=${USER:-root}
+PUBKEY_FILE=${PUBKEY_FILE:-${PWD}/testbed-key}
+ECHO=${ECHO:-}
 
-sh install-tools-key-and-prep.${RELEASE}
+if [ -f ${PUBKEY_FILE} ]; then
+   echo "Found testbed public key ${PUBKEY_FILE}"
+   ${ECHO} ssh-add ${PUBKEY_FILE}
+else
+   echo "No testbed public key ${PUBKEY_FILE}, generating..."
+   ${ECHO} ssh-keygen -t rsa -f ${PUBKEY_FILE} -N ""
+fi
+
+HOSTS=${HOSTS:-127.0.0.1}
+for HOST in ${HOSTS}; do 
+    ${ECHO} ssh-copy-id -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${PUBKEY_FILE} ${USER}@${HOST}
+    ${ECHO} ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${PUBKEY_FILE} ${USER}@${HOST} sudo apt-get install -y dpkg-dev contrail-setup contrail-fabric-utils;
+    ${ECHO} ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${PUBKEY_FILE} ${USER}@${HOST} sudo pip install fabric==1.7.0;
+    ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${PUBKEY_FILE} ${USER}@${HOST} <<EOF
+        ${ECHO} sed -i -e 's/def create_install_repo_node\(.*\):/def create_install_repo_node\1:\n    return\n/' /opt/contrail/utils/fabfile/tasks/install.py
+        ${ECHO} sed -i -e "s/if '1.04' in rls:/if rls and '1.04' in rls:/" /opt/contrail/utils/fabfile/tasks/provision.py
+        if [ -f /opt/contrail/contrail_installer/contrail_setup_utils/setup.py ]; then
+            ${ECHO} sed -i -e 's/Xss220k/Xss300k/' /opt/contrail/contrail_installer/contrail_setup_utils/setup.py
+        fi
+EOF
+
+done
+
+# set ssh key pointer in example testbeds
+${ECHO} echo "env.key_filename='${PUBKEY_FILE}'" >> /opt/contrail/utils/fabfile/testbeds/testbed_singlebox_example.py
+${ECHO} echo "env.key_filename='${PUBKEY_FILE}'" >> /opt/contrail/utils/fabfile/testbeds/testbed_multibox_example.py

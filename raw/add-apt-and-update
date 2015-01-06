@@ -25,6 +25,11 @@ case ${OPENSTACK_VER},${CONTRAIL_VER},${DISTRO_VER} in
         echo "deb [arch=amd64] http://ubuntu-repo.opencontrail.org.s3-website-us-east-1.amazonaws.com opencontrail-r120-icehouse main" >> ${APT_SOURCES_FILE}
         ;;
 
+    icehouse,r200,ubuntu1404)
+        echo "deb [arch=amd64] http://ubuntu-repo.opencontrail.org.s3-website-us-east-1.amazonaws.com opencontrail-stock-ubuntu1404-icehouse main" >> ${APT_SOURCES_FILE}
+        echo "deb [arch=amd64] http://ubuntu-repo.opencontrail.org.s3-website-us-east-1.amazonaws.com/opencontrail-r200-icehouse opencontrail-r200-icehouse main" >> ${APT_SOURCES_FILE}
+        ;;
+
     *)
         echo "Unknown combination ${OPENSTACK_VER}, ${CONTRAIL_VER}, ${DISTRO_VER}"
         exit 1
