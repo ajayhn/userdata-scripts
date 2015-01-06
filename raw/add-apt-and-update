@@ -1,6 +1,6 @@
 #!/bin/sh
 OPENSTACK_VER=${OPENSTACK:-icehouse}
-CONTRAIL_VER=${CONTRAIL:-r120}
+CONTRAIL_VER=${CONTRAIL:-r200}
 DISTRO_VER=${DISTRO:-ubuntu1204}
 
 echo "openstack " ${OPENSTACK_VER}
