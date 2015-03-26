@@ -1,6 +1,6 @@
 #!/bin/sh
 OPENSTACK_VER=${OPENSTACK:-icehouse}
-CONTRAIL_VER=${CONTRAIL:-r200}
+CONTRAIL_VER=${CONTRAIL:-r201}
 DISTRO_VER=${DISTRO:-ubuntu1204}
 
 echo "openstack " ${OPENSTACK_VER}
@@ -33,6 +33,11 @@ case ${OPENSTACK_VER},${CONTRAIL_VER},${DISTRO_VER} in
     icehouse,r200,ubuntu1404)
         echo "deb [arch=amd64] http://ubuntu-repo.opencontrail.org.s3-website-us-east-1.amazonaws.com opencontrail-stock-ubuntu1404-icehouse main" >> ${APT_SOURCES_FILE}
         echo "deb [arch=amd64] http://ubuntu-repo.opencontrail.org.s3-website-us-east-1.amazonaws.com/opencontrail-r200-icehouse opencontrail-r200-icehouse main" >> ${APT_SOURCES_FILE}
+        ;;
+
+    icehouse,r201,ubuntu1404)
+        echo "deb [arch=amd64] http://ubuntu-repo.opencontrail.org.s3-website-us-east-1.amazonaws.com opencontrail-stock-ubuntu1404-icehouse main" >> ${APT_SOURCES_FILE}
+        echo "deb [arch=amd64] http://ubuntu-repo.opencontrail.org.s3-website-us-east-1.amazonaws.com/opencontrail-r201-icehouse opencontrail-r201-icehouse main" >> ${APT_SOURCES_FILE}
         ;;
 
     *)
