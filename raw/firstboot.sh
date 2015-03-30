@@ -13,6 +13,8 @@ sed -i -r -e 's/control_network_ip=.*/control_network_ip='${DHCP_ADDR}'/' -e 's/
 touch ${FB_FLAG}
 
 # delete any previous provisioning of us and re-add with right ip
+# give supervisor-config a chance to be up
+sleep 30
 python /opt/contrail/utils/provision_vrouter.py --host_name $(hostname) --host_ip ${DHCP_ADDR} --api_server_ip 127.0.0.1 --oper del --admin_user admin --admin_password secret123 --admin_tenant_name admin --openstack_ip 127.0.0.1 
 python /opt/contrail/utils/provision_vrouter.py --host_name $(hostname) --host_ip ${DHCP_ADDR} --api_server_ip 127.0.0.1 --oper add --admin_user admin --admin_password secret123 --admin_tenant_name admin --openstack_ip 127.0.0.1
 
