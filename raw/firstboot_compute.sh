@@ -1,6 +1,6 @@
 #!/bin/bash
 
-FB_FLAG=/var/log/contrail/firstboot.log
+FB_FLAG=/var/log/contrail/firstboot_compute.log
 if [ -f ${FB_FLAG} ]; then
     exit 0
 fi
