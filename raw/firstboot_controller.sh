@@ -49,6 +49,26 @@ if [ -f /etc/zookeeper/conf/zoo.cfg ]; then
     sed -i "s/server.1=127.0.0.1:2888:3888/server.1=${HOST_ADDR}:2888:3888/" /etc/zookeeper/conf/zoo.cfg
 fi
 
+# openstack-node conf files
+if [ -f /etc/ceilometer/ceilometer.conf ]; then
+    openstack-config --set /etc/ceilometer/ceilometer.conf DEFAULT rabbit_host ${HOST_ADDR}
+fi
+if [ -f /etc/glance/glance-registry.conf ]; then
+    openstack-config --set /etc/glance/glance-registry.conf DEFAULT rabbit_host ${HOST_ADDR}
+fi
+if [ -f /etc/glance/glance-api.conf ]; then
+    openstack-config --set /etc/glance/glance-api.conf DEFAULT rabbit_host ${HOST_ADDR}
+fi
+if [ -f /etc/heat/heat.conf ]; then
+    openstack-config --set /etc/heat/heat.conf DEFAULT rabbit_host ${HOST_ADDR}
+fi
+if [ -f /etc/keystone/keystone.conf ]; then
+    openstack-config --set /etc/keystone/keystone.conf DEFAULT rabbit_host ${HOST_ADDR}
+fi
+if [ -f /etc/nova/nova.conf ]; then
+    openstack-config --set /etc/nova/nova.conf DEFAULT rabbit_host ${HOST_ADDR}
+fi
+
 # config-node conf files
 if [ -f /etc/contrail/contrail-discovery.conf ]; then
     openstack-config --set /etc/contrail/contrail-discovery.conf DEFAULTS cassandra_server_list ${HOST_ADDR}:9160
@@ -70,6 +90,9 @@ if [ -f /etc/contrail/contrail-svc-monitor.conf ]; then
     openstack-config --set /etc/contrail/contrail-svc-monitor.conf DEFAULTS zk_server_ip ${HOST_ADDR}:2181
     openstack-config --set /etc/contrail/contrail-svc-monitor.conf DEFAULTS cassandra_server_list $HOST_ADDR:9160
     openstack-config --set /etc/contrail/contrail-svc-monitor.conf DEFAULTS api_server_ip ${HOST_ADDR}
+fi
+if [ -f /etc/neutron/neutron.conf ]; then
+    openstack-config --set /etc/neutron/neutron.conf DEFAULT rabbit_host ${HOST_ADDR}
 fi
 
 # control-node conf files
