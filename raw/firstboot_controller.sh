@@ -22,8 +22,8 @@ fi
 # database-node conf files
 if [ -f /etc/cassandra/cassandra.yaml ]; then
     sed -i "s/listen_address: 127.0.0.1/listen_address: $HOST_ADDR/" /etc/cassandra/cassandra.yaml 
-    sed -i "s/rpc_address: 127.0.0.1/rpc_address: $HOST_ADDR/" /etc/cassandra/cassandra.yaml 
-    sed -i "s/seeds: 127.0.0.1/seeds: $HOST_ADDR/" /etc/cassandra/cassandra.yaml 
+    sed -i "s/rpc_address: 127.0.0.1/rpc_address: $HOST_ADDR/" /etc/cassandra/cassandra.yaml
+    sed -i 's/seeds: "127.0.0.1"/seeds: "'$HOST_ADDR'"/' /etc/cassandra/cassandra.yaml
 fi
 
 if [ -f /etc/zookeeper/conf/zoo.cfg ]; then
