@@ -1,6 +1,7 @@
 #!/bin/bash
 set -x
 
+# sentinel check. exit if this has run already
 FB_FLAG=/var/log/contrail/firstboot_controller.log
 if [ -f ${FB_FLAG} ]; then
     exit 0
@@ -12,6 +13,24 @@ if [ -f /etc/contrail/contrail-vrouter-agent.conf ]; then
     export HOST_ADDR=$(ifconfig ${PHYS_INTF} | grep "inet addr" | awk '{ print $2 }' | cut -d ':' -f 2)
 else
     export HOST_ADDR=$(ip route get 8.8.8.8 | awk '/8.8.8.8/ {print $NF}')
+fi
+
+# grab correct hostname from metadata if cloud-init based system and persist
+if [ -f /etc/init/cloud-init.conf ]; then
+    # iterate till we find a non-null hostname value
+    while true; do
+        M_HOSTNAME=$(curl -sq http://169.254.169.254/2009-04-04/meta-data/hostname | cut -d'.' -f 1)
+        if [ -n "${M_HOSTNAME}" ]; then
+            break
+        else
+            sleep 2
+        fi
+    done
+        
+    OLD_HOSTNAME=$(cat /etc/hostname)
+    hostname ${M_HOSTNAME}
+    echo ${M_HOSTNAME} > /etc/hostname
+    sed -i 's/'${OLD_HOSTNAME}'/'${M_HOSTNAME}'/g' /etc/hosts
 fi
 
 if [ -f /etc/rabbitmq/rabbitmq-env.conf ]; then
@@ -84,4 +103,4 @@ if [ -f /etc/contrail/contrail-collector.conf ]; then
 fi
 
 touch ${FB_FLAG}
-
+reboot
