@@ -103,4 +103,3 @@ if [ -f /etc/contrail/contrail-collector.conf ]; then
 fi
 
 touch ${FB_FLAG}
-reboot
