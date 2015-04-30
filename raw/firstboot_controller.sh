@@ -6,7 +6,7 @@ if [ -f ${FB_FLAG} ]; then
     exit 0
 fi
 
-if [ -f /tmp/etc/contrail/contrail-vrouter-agent.conf ]; then
+if [ -f /etc/contrail/contrail-vrouter-agent.conf ]; then
     PHYS_INTF=$(grep "^physical_interface=" /etc/contrail/contrail-vrouter-agent.conf | cut -d'=' -f 2)
     dhclient -v ${PHYS_INTF}
     export HOST_ADDR=$(ifconfig ${PHYS_INTF} | grep "inet addr" | awk '{ print $2 }' | cut -d ':' -f 2)
